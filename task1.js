@@ -20,28 +20,36 @@ M is an integer within the range [1..2,000];
 each element of S consists only of lowercase English letters (a-z);
 N * M ≤ 30,000
 */
-const S =  ["zzzz", "ferz", "zdsr", "fgtd"]
-function solution (s){
-    let result = [];
-    let trcker = 0
-    for(let i = 0; i <= s.length; i++){
-    for (char of s[i] ){ 
-       console.log(char)
-       for (let j= 1;j <= s.length-1;j++){
-        console.log(char,s[j][trcker],trcker)
-        if (char === s[j][trcker]){       
-          console.log("yes!")
-          console.log(char,j,s[j][trcker],i)
-          result.push(i,j,trcker)
-            return result
-        }else{
-            console.log("give me  a second")
+function solution(S) {
+    // Iterate through each string in the array
+    for (let i = 0; i < S.length; i++) {
+        const s1 = S[i];
+        
+        // Iterate through the rest of the strings in the array
+        for (let j = i + 1; j < S.length; j++) {
+            const s2 = S[j];
+            
+            // Iterate through each character position in the strings
+            for (let k = 0; k < s1.length; k++) {
+                // If the characters at the current position in both strings are equal
+                if (s1[k] === s2[k]) {
+                    // Return the indexes of the strings and the position of the common letter
+                    return [i, j, k];
+                }
+            }
         }
-       } 
-       trcker = trcker+1    
-       console.log(trcker)
     }
-    }
+    
+    // If no pair of strings shares a common letter, return an empty array
+    return [];
 }
-value =solution(S)
-console.log(value)
+
+// Example usage
+const S = ["abc", "bca", "dbe"]
+console.log(solution(S)); 
+const S2 = ["zzzz", "ferz", "zdsr", "fgtd"];
+console.log(solution(S2)); 
+const S3 = ["gr", "sd", "rg"];
+console.log(solution(S3));
+const S4 = ["bdafg", "ceagi"];
+console.log(solution(S4));
